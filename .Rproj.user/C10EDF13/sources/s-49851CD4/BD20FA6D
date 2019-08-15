@@ -7,14 +7,14 @@
     "folds" : "",
     "hash" : "0",
     "id" : "BD20FA6D",
-    "lastKnownWriteTime" : 1565883061,
-    "last_content_update" : 1565883061670,
+    "lastKnownWriteTime" : 1565886478,
+    "last_content_update" : 1565886478508,
     "path" : "~/Dropbox/encuestas_fes/fes.Rmd",
     "project_path" : "fes.Rmd",
     "properties" : {
-        "cursorPosition" : "35,4",
+        "cursorPosition" : "16,0",
         "last_setup_crc32" : "49851CD4ff2d116",
-        "scrollLine" : "27",
+        "scrollLine" : "9",
         "tempName" : "Untitled1"
     },
     "read_only" : false,

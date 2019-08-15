@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1565886403160.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "591235398",
+    "id" : "3C4B2BDA",
+    "lastKnownWriteTime" : 1565886497,
+    "last_content_update" : 1565886497917,
+    "path" : "~/Dropbox/encuestas_fes/index.Rmd",
+    "project_path" : "index.Rmd",
+    "properties" : {
+        "cursorPosition" : "10,1",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

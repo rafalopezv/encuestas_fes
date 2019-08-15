@@ -222,7 +222,7 @@ hc2 <- highchart() %>%
   hc_credits(enabled = TRUE, text = "seleccione las candidaturas") 
 
 htmlwidgets::saveWidget(hc2, here::here("img", "sin_margen_error.html"))
-
+hc2
 ## graficos de tamaño muestra y márgenes de error
 df %>% 
   hchart(type = "column", hcaes(x = fecha_1, margen_error, group = encuestadora_1))
