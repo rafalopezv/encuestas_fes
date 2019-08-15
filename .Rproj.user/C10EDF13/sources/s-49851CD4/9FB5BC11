@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1565147819716.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "9FB5BC11",
+    "lastKnownWriteTime" : 1565885961,
+    "last_content_update" : 1565885968207,
+    "path" : "~/Dropbox/encuestas_fes/procesamiento_graficos.R",
+    "project_path" : "procesamiento_graficos.R",
+    "properties" : {
+        "cursorPosition" : "223,72",
+        "scrollLine" : "210",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

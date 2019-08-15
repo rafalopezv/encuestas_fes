@@ -1,0 +1,86 @@
+reactable(iris, columns = list(
+  Sepal.Length = colDef(style = function(value) {
+    if (is.numeric(value)) {
+      color <- "red"
+    }
+    list(color = color, fontWeight = "light", fontFamily = "Roboto Condensed")
+  })
+))
+
+reactable(iris, colDef(style = list(color = color, fontWeight = "light", fontFamily = "Roboto Condensed")))
+reactable(iris, class = .bold {
+  font-weight: bold;
+})
+
+reactable(iris, colDef(fontWeight = "light", fontFamily = "Roboto Condensed")), 
+            rownames = F)
+
+
+reactable(df, columns = list(
+  `Partido o Alianza` = colDef(style = function(value) {
+    if (is.numeric(value)) {
+      color <- "red"
+    }
+    list(color = color, 
+         fontWeight = "light", 
+         fontFamily = "Roboto Condensed",
+         fontSize = 8)
+  })
+))
+
+aa <- reactable(df, filterable = TRUE, pagination = FALSE, columns = list(
+  Fecha = colDef(style = function(value) {
+    if (is.character(value)) {
+      color <- "black"
+    }
+    list(color = color, 
+         fontWeight = "light", 
+         fontFamily = "Roboto Condensed",
+         fontSize = 10)
+  }),
+  Partido = colDef(style = function(value) {
+    if (is.character(value)) {
+      color <- "black"
+    }
+    list(color = color, 
+         fontWeight = "light", 
+         fontFamily = "Roboto Condensed",
+         fontSize = 10)
+  }),
+  Opción =  colDef(style = function(value) {
+    if (is.character(value)) {
+      color <- "black"
+    }
+    list(color = color, 
+         fontWeight = "light", 
+         fontFamily = "Roboto Condensed",
+         fontSize = 10)
+  }),
+  `Intención de voto` = colDef(style = function(value) {
+    if (is.character(value)) {
+      color <- "black"
+    }
+    list(color = color, 
+         fontWeight = "light", 
+         fontFamily = "Roboto Condensed",
+         fontSize = 10)
+  }),
+  Encuestadora = colDef(style = function(value) {
+    if (is.character(value)) {
+      color <- "black"
+    }
+    list(color = color, 
+         fontWeight = "light", 
+         fontFamily = "Roboto Condensed",
+         fontSize = 10)
+  }),
+  
+))
+
+df %>% colnames()
+aa %>% 
+  htmlwidgets::saveWidget(here::here("img", "tabla.html"))
+
+colnames(df)
+
+

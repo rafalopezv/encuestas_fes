@@ -1,0 +1,76 @@
+
+df %<>% 
+  select(-codigo_encuesta, `Partido o Alianza` = partido_o_alianza, `Candidato a la Presidencia` = candidato_a_la_presidencia,
+         `Intención de voto` = valor, Mes = mes, Año = año, Encuestadora = encuestadora, `Medio de publicación` = medio,
+         -orden, `Margen de error` = margen_error, `Intervalo de confianza` = confianza, 
+         `Método de la encuesta` = método, `Tamaño de la muestra` = alcance_muestra,
+         `Ciudades capitales + El Alto` = `ciudades_capitales (+EA)`, `Ciudades intermedias` = ciudades_intermedias,
+         `Área rural` = area_rural, `Fecha de inicio de la encuesta` = fecha_inicio_encuesta, 
+         `Fecha de conclusión de la encuesta` = fecha_conclusion_encuesta, -candidato,
+         -min, -max, -dia_cierre, -fecha_1, -encuestadora_1)
+
+
+df$`Partido o Alianza` %<>% gsub("CC", "Comunidad Ciudadana", .)
+df$`Partido o Alianza` %<>% gsub("MTS", "Movimiento Tercer Sistema", .)
+df$`Partido o Alianza` %<>% gsub("MNR", "Moviemiento Nacionalista Revolucionario", .)
+df$`Partido o Alianza` %<>% gsub("PDC", "Partido Demócrata Cristino", .)
+df$`Partido o Alianza` %<>% gsub("PAN-BOL", "Partido de Acción Nacional Boliviano", .)
+df$`Partido o Alianza` %<>% gsub("FPV", "Frente para la Victoria", .)
+df$`Partido o Alianza` %<>% gsub("21F", "Bolivia dijo No", .)
+df$`Partido o Alianza` %<>% gsub("UCS", "Unión Cívica Solidaridad", .)
+
+df$`Candidato a la Presidencia` %<>% gsub("Morales", "Evo Morales", .)
+df$`Candidato a la Presidencia` %<>% gsub("Mesa", "Carlos Mesa", .)
+df$`Candidato a la Presidencia` %<>% gsub("Patzi", "Félix Patzi", .)
+df$`Candidato a la Presidencia` %<>% gsub("Lema", "Virginio Lema", .)
+df$`Candidato a la Presidencia` %<>% gsub("Quiroga", "Jorge Quiroga", .)
+df$`Candidato a la Presidencia` %<>% gsub("Paz Zamora", "Jaime Paz Zamora", .)
+df$`Candidato a la Presidencia` %<>% gsub("Nina", "Ruth Nina", .)
+df$`Candidato a la Presidencia` %<>% gsub("Rodríguez", "Israel Rodríguez", .)
+df$`Candidato a la Presidencia` %<>% gsub("Albarracín", "Waldo Albarracín", .)
+df$`Candidato a la Presidencia` %<>% gsub("Revilla", "Luis Revilla", .)
+df$`Candidato a la Presidencia` %<>% gsub("Costas", "Rubén Costas", .)
+df$`Candidato a la Presidencia` %<>% gsub("Doria Medina", "Samuel Doria Medina", .)
+df$`Candidato a la Presidencia` %<>% gsub("Ortiz", "Oscar Ortiz", .)
+df$`Candidato a la Presidencia` %<>% gsub("Cárdenas", "Victor Hugo Cárdenas", .)
+df$`Candidato a la Presidencia` %<>% gsub("Voto secreto", "El voto es secreto", .)
+
+df$Mes %<>% str_to_title(.)
+
+df$Encuestadora %<>% gsub("_", " ", .)
+df$Encuestadora %<>% str_to_title(.)
+df$Encuestadora %<>% gsub("Mercados Y Muestras", "Mercados y Muestras", .)
+
+
+df$`Medio de publicación` %<>% gsub("pg7", "Página 7", .) 
+df$`Medio de publicación` %<>% gsub("pat", "PAT", .) 
+df$`Medio de publicación` %<>% gsub("rtp", "RTP", .) 
+df$`Medio de publicación` %<>% gsub("atb", "ATB", .) 
+df$`Medio de publicación` %<>% gsub("la_razon", "La Razón", .) 
+
+df$fecha <- NULL
+
+df %<>% 
+  mutate(Fecha = paste0(Año, ", ", Mes))
+df %<>% 
+  select(Fecha, -`Fecha de inicio de la encuesta`, -`Fecha de conclusión de la encuesta`,
+         Partido = `Partido o Alianza`, Opción = `Candidato a la Presidencia`, -Mes,
+         `Intención de voto`, -Año, Encuestadora, -`Medio de publicación`, 
+        `Margen de error`,  -`Intervalo de confianza`, 
+         -`Método de la encuesta`, `Tamaño de la muestra`, `Ciudades capitales + El Alto`,
+        `Ciudades intermedias`, `Área rural`) 
+
+df %<>% 
+  filter(is.na(`Intención de voto`))
+
+
+reactable(df, filterable = TRUE, pagination = FALSE, inline = T,
+          showSortable = T) %>% 
+  htmlwidgets::saveWidget(here::here("img", "tabla.html"))
+  
+
+# confección de la tabla
+
+
+
+

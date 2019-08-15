@@ -1,0 +1,19 @@
+df <- rio::import("output/encuestas.xlsx")
+df %>% 
+  select(codigo_encuesta, año) %>% 
+  unique %>% 
+  arrange(codigo_encuesta, año) %>% 
+  mutate(no = 1:nrow(.)) %>% 
+  mutate(
+    margen_error = NA,
+    confianza = NA,
+    alcance_muestra = NA,
+    ciudades_capitales = NA,
+    ciudades_intermedias = NA,
+    area_rural = NA,
+    fecha_elaboracion = NA
+  ) %>% 
+  rio::export("output/encuestas_fichas.xlsx")
+  
+  
+

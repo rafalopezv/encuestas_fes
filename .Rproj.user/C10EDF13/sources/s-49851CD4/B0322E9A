@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1565214371767.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B0322E9A",
+    "lastKnownWriteTime" : 140642059701816,
+    "last_content_update" : 1565214371767,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "18142D8C",
+        "caption" : "fichas",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=fichas&cache_key=18142D8C",
+        "displayedObservations" : "31",
+        "environment" : "",
+        "expression" : "fichas",
+        "object" : "fichas",
+        "preview" : "0",
+        "totalObservations" : "31",
+        "variables" : "10"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
