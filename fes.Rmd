@@ -12,11 +12,6 @@ knitr::opts_knit$set(self.contained = T)
 library(readr)
 ```
 
-Sobre el proyecto {data-icon="fa-sticky-note"}
-=====================================  
-
-<h2>Descripción de porque y para que se hace esto</h2>
-
 Resultados encuestas {data-icon="fa-chart-bar"}
 =====================================  
 
@@ -26,7 +21,7 @@ Row {.tabset .tabset-fade}
 <iframe frameBorder="0" src="img/sin_margen_error.html" width="100%" height="100%" allowtransparency="true"></iframe>
 
 ### Resultados con ponderaciones
-<iframe frameBorder="0" src="img/final.html" width="100%" height="100%" allowtransparency="true"></iframe>
+<iframe width="983" height="452" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRrkrs91NFfjIgL76DyQATvjAsaklmOxLkxS1y4cJorP8Bk92wmDxFprhHIxgi-eGeBotlHD3_W8mpx/pubchart?oid=1247236956&amp;format=interactive"></iframe>
 
 Base de datos {data-icon="fa-database"}
 =====================================  
@@ -48,4 +43,12 @@ Metodología {data-icon="fa-pencil-alt"}
 
 Sobre encuestadoras {data-icon="fa-list-alt"}
 =====================================  
+
+Sobre el proyecto {data-icon="fa-sticky-note"}
+=====================================  
+
+<h2>El presente proyecto busca recopilar información relevante para el proceso electoral en Bolivia de cara a las elecciones generales del 20 de octubre de 2019. En su primera fase, el proyecto procura reunir las cifras de todas las encuestas electorales publicadas en Bolivia desde noviembre de 2016. Considerando que a la fecha se publicaron y difundieron datos en más de 10 medios, producidos por 7 encuestadoras, el proyecto busca comparar los datos.</h2>
+
+
+
 
