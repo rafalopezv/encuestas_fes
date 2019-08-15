@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "0",
+    "hash" : "474283085",
     "id" : "3C4B2BDA",
-    "lastKnownWriteTime" : 1565887686,
-    "last_content_update" : 1565887686827,
+    "lastKnownWriteTime" : 1565895641,
+    "last_content_update" : 1565895641367,
     "path" : "~/Dropbox/encuestas_fes/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "8,2",
-        "scrollLine" : "0"
+        "cursorPosition" : "25,0",
+        "scrollLine" : "16"
     },
     "read_only" : false,
     "read_only_alternatives" : [
