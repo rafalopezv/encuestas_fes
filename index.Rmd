@@ -76,25 +76,25 @@ El proyecto se realiza con apoyo de la [Fundación Friedrich Ebert (FES)](https:
 ### Más de 40 encuestas
 
 ```{r}
-flexdashboard::valueBox(45, icon = "fa-chart-bar")
+flexdashboard::valueBox(40, icon = "fa-chart-bar")
 ```
 
 ### Difundidas en más de 10 medios
 
 ```{r}
-flexdashboard::valueBox(34, icon = "fa-newspaper")
+flexdashboard::valueBox(10, icon = "fa-newspaper")
 ```
 
 ### 7 Encuestadoras
 
 ```{r}
-flexdashboard::valueBox(34, icon = "fa-poll")
+flexdashboard::valueBox(7, icon = "fa-poll")
 ```
 
 ### De noviembre 2016 a la fecha 
 
 ```{r}
-flexdashboard::valueBox(34, icon = "fa-calendar-alt")
+flexdashboard::valueBox("3 años", icon = "fa-calendar-alt")
 ```
 
 
