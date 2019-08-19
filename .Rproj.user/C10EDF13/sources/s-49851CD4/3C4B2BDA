@@ -5,15 +5,16 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "474283085",
+    "hash" : "241124408",
     "id" : "3C4B2BDA",
-    "lastKnownWriteTime" : 1565895641,
-    "last_content_update" : 1565895641367,
+    "lastKnownWriteTime" : 1566244998,
+    "last_content_update" : 1566244998087,
     "path" : "~/Dropbox/encuestas_fes/index.Rmd",
     "project_path" : "index.Rmd",
     "properties" : {
-        "cursorPosition" : "25,0",
-        "scrollLine" : "16"
+        "cursorPosition" : "54,694",
+        "last_setup_crc32" : "49851CD4d2dd592",
+        "scrollLine" : "48"
     },
     "read_only" : false,
     "read_only_alternatives" : [

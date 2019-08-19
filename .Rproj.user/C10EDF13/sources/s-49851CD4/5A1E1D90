@@ -2,18 +2,18 @@
     "collab_server" : "",
     "contents" : "",
     "created" : 1565147751005.000,
-    "dirty" : false,
+    "dirty" : true,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1932976242",
+    "hash" : "0",
     "id" : "5A1E1D90",
     "lastKnownWriteTime" : 1565622804,
-    "last_content_update" : 1565622804909,
+    "last_content_update" : 1566231352970,
     "path" : "~/Dropbox/encuestas_fes/codigo.R",
     "project_path" : "codigo.R",
     "properties" : {
-        "cursorPosition" : "80,49",
-        "scrollLine" : "60"
+        "cursorPosition" : "87,0",
+        "scrollLine" : "67"
     },
     "read_only" : false,
     "read_only_alternatives" : [

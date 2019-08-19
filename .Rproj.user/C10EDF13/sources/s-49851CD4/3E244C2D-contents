@@ -1,0 +1,102 @@
+hc2 <- highchart() %>% 
+  hc_add_series(morales, type = "line", color = 'blue', 
+                hcaes(x = fecha, y = valor, group = candidato),
+                tooltip = list(pointFormat = paste("<b>Evo Morales:<b> {point.valor} %<br>
+                                                         <b>Fecha de cierre encuesta:<b> {point.fecha_1}<br>
+                                                         <b>Encuestadora:<b> {point.encuestadora_1}<br>
+                                                         <b>Margen de error:<b> {point.margen_error} %<br>
+                                                         <b>Tamaño de la muestra:<b> {point.alcance_muestra}"
+                ), headerFormat = ""),
+                name = "Evo Morales", id = "morales") %>% 
+  hc_add_series(mesa, type = "line", color = 'orange', 
+                hcaes(x = as.factor(mesa$fecha_conclusion_encuesta), y = valor, group = candidato),
+                tooltip = list(pointFormat = paste("<b>Carlos Mesa:<b> {point.valor} %<br>
+                                                         <b>Fecha de cierre encuesta:<b> {point.fecha_1}<br>
+                                                         <b>Encuestadora:<b> {point.encuestadora_1}<br>
+                                                         <b>Margen de error:<b> {point.margen_error} %<br>
+                                                         <b>Tamaño de la muestra:<b> {point.alcance_muestra}"
+                ), headerFormat = ""),
+                name = "Carlos Mesa", id = "mesa") %>% 
+  hc_add_series(ortiz, type = "line", color = 'red', 
+                hcaes(x = as.factor(ortiz$fecha_conclusion_encuesta), y = valor, group = candidato),
+                tooltip = list(pointFormat = paste("<b>Oscar Ortiz:<b> {point.valor} %<br>
+                                                         <b>Fecha de cierre encuesta:<b> {point.fecha_1}<br>
+                                                         <b>Encuestadora:<b> {point.encuestadora_1}<br>
+                                                         <b>Margen de error:<b> {point.margen_error} %<br>
+                                                         <b>Tamaño de la muestra:<b> {point.alcance_muestra}"
+                ), headerFormat = ""),
+                name = "Oscar Ortiz", id = "ortiz") %>% 
+  hc_add_series(otros, type = "line", color = '#A9A9A9', 
+                hcaes(x = as.factor(fecha_1), y = valor, group = candidato),
+                tooltip = list(pointFormat = paste("<b>Otros:<b> {point.valor} %<br>
+                                                         <b>Fecha de cierre encuesta:<b> {point.fecha_1}<br>
+                                                         <b>Encuestadora:<b> {point.encuestadora_1}<br>
+                                                         <b>Margen de error:<b> {point.margen_error} %<br>
+                                                         <b>Tamaño de la muestra:<b> {point.alcance_muestra}"
+                ), headerFormat = ""),
+                name = "Otras candidaturas", id = "otros") %>% 
+  hc_add_series(no_declarado, type = "line", color = '#00b200', 
+                hcaes(x = as.factor(fecha_1), y = valor),
+                tooltip = list(pointFormat = paste("<b>No declarado:<b> {point.valor} %<br>
+                                                         <b>Fecha de cierre encuesta:<b> {point.fecha_1}<br>
+                                                         <b>Encuestadora:<b> {point.encuestadora_1}<br>
+                                                         <b>Margen de error:<b> {point.margen_error} %<br>
+                                                         <b>Tamaño de la muestra:<b> {point.alcance_muestra}"
+                ), headerFormat = ""),
+                name = "Voto no declarado", id = "no_declarado") %>%
+  hc_xAxis(categories = morales$fecha_1,
+           tickmarkPlacement = "on",
+           title = list(enabled = T)) %>% 
+  hc_yAxis(title = list(text = "Intención de voto")) %>% 
+  hc_title(text = "Tendencia electoral") %>% 
+  hc_subtitle(text = "Elecciones generales Bolivia 2019") %>% 
+  hc_tooltip(shared = F) %>% 
+  hc_plotOptions(line = list(
+    marker = list(
+      lineWidth = 1/100,
+      lineColor = "#ffffff",
+      enabled = F
+    ),
+    dataLabels = list(
+      enabled = T,
+      format = "{point.valor:.0f} %"
+    ))
+  ) %>% 
+  hc_credits(enabled = TRUE, text = "seleccione las candidaturas") 
+
+hc2 %>% 
+  hc_add_theme(hc_theme_elementary())
+
+# <- <- <- <- <- <- <- <- <- <- <- <- <- <- <- <- <- <- 
+
+## Not run: 
+data("favorite_bars")
+data("favorite_pies")
+
+highchart() %>% 
+  hc_title(text = "This is a bar graph describing my favorite pies
+                   including a pie chart describing my favorite bars") %>%
+  hc_subtitle(text = "In percentage of tastiness and awesomeness") %>% 
+  hc_add_series_labels_values(favorite_pies$pie, favorite_pies$percent, name = "Pie",
+                              colorByPoint = TRUE, type = "columnn") %>% 
+  hc_add_series_labels_values(favorite_bars$bar, favorite_bars$percent,
+                              colors = substr(terrain.colors(5), 0 , 7), type = "pie",
+                              name = "Bar", colorByPoint = TRUE, center = c('35%', '10%'),
+                              size = 100, dataLabels = list(enabled = FALSE)) %>% 
+  hc_yAxis(title = list(text = "percentage of tastiness"),
+           labels = list(format = "{value}%"), max = 100) %>% 
+  hc_xAxis(categories = favorite_pies$pie) %>% 
+  hc_legend(enabled = FALSE) %>% 
+  hc_tooltip(pointFormat = "{point.y}%")
+  
+
+
+
+
+
+
+
+
+
+
+

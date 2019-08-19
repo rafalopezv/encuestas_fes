@@ -3,20 +3,19 @@ library(tidyverse)
 library(magrittr)
 library(janitor)
 
-df <- rio::import("input/Cuadro de intención de voto en el nivel nacional en porcentajes_1.xlsx") %>% 
+df <- rio::import("input/Cuadro de intención de voto en el nivel nacional en porcentajes_2016.xlsx") %>% 
   clean_names()
 
-df_1 <- rio::import("input/Cuadro de intención de voto en el nivel nacional en porcentajes.xlsx") %>% 
-  clean_names()
-
-row_1 <- df %>% slice(1)
-correction <- c(NA, NA, "marzo_2018", "mayo_2018", rep("julio_2018", 2), "agosto_2018", rep("septiembre_2018", 2), 
+row_1 <- df %>% slice(2)
+correction <- c(NA, NA, "noviembre_2016", "enero_2017", "marzo_2017", "mayo_2017", "julio_2017", "septiembre_2017",
+                "octubre_2017", "noviembre_2017", "diciembre_2017", "enero_2018", "marzo_2018", "mayo_2018", rep("julio_2018", 2), "agosto_2018", rep("septiembre_2018", 2), 
   rep("octubre_2018", 4), "noviembre_2018", rep("diciembre_2018", 2), rep("enero_2019", 2),
-  rep("febrero_2019", 2), rep("marzo_2019", 3), rep("abril_2019", 2), rep("mayo_2019", 2), rep("julio_2019", 3))
+  rep("febrero_2019", 2), rep("marzo_2019", 3), rep("abril_2019", 2), rep("mayo_2019", 2), rep("julio_2019", 3), 
+  rep("agosto_2019", 2))
 names <- paste0(row_1, ":" , correction)
 colnames(df) <- names
 df %<>% 
-  slice(-c(1:6)) %>% 
+  slice(-c(1:7)) %>% 
   gather(encuestadora, valor, -`Partido o alianza:NA`, -`Candidato a la presidencia:NA`) 
 
 df$mes <- str_split(df$encuestadora, pattern = ":") %>% 
@@ -26,7 +25,7 @@ df$mes <- str_split(df$encuestadora, pattern = ":") %>%
 df %<>% 
   mutate(año = parse_number(mes)) 
 
-df$mes %<>% gsub("_2018|_2019", "", .)
+df$mes %<>% gsub("_2016|_2017|_2018|_2019", "", .)
 
 df %<>% clean_names() 
 colnames(df) %<>% gsub("_na", "", .) 
@@ -34,12 +33,11 @@ df$valor %<>% as.numeric()
 df %<>% 
   filter(!partido_o_alianza %in% "Totales")
 
-df$encuestadora <- str_split(df$encuestadora, pattern = ":") %>%
+df$encuestadora  <- str_split(df$encuestadora, pattern = ":") %>%
   map(., first) %>% 
   unlist()
 
 df$encuestadora <-  str_replace_all(df$encuestadora, "[\r\n]" , "")
-df$encuestadora %>% unique
 
 df %<>% 
   mutate(encuestadora_1 = case_when(
@@ -51,7 +49,10 @@ df %<>%
     encuestadora == "CIESMORI (ATB)" ~ "ciesmori",
     encuestadora == "Celag" ~ "celag",
     encuestadora == "Tal Cual (La Razón)" ~ "tal_cual",
-    encuestadora == "Captura Consulting  (Poder y Placer/PAT)" ~ "captura_consulting"
+    encuestadora == "Captura Consulting  (Poder y Placer/PAT)" ~ "captura_consulting",
+    encuestadora == "CIESMORI (Grupo El Deber [El Deber/Unitel/El Potosí/Correo del Sur])" ~ "ciesmori",
+    encuestadora == "Víaciencia S.R.L.(Red Uno/ATB/Unitel/Bolivisión/PAT)" ~ "viaciencia",
+    encuestadora == "Mercados y Muestras SRL (Voto informado [Página Siete, Los Tiempos y Asuntos Centrales])" ~ "mercados_y_muestras"
   ),
   medio = case_when(
     encuestadora == "Captura Consulting (Poder y Placer/PAT)" ~ "pat",
@@ -60,12 +61,16 @@ df %<>%
     encuestadora == "IPSOS (RTP)" ~ "rtp",
     encuestadora == "Tal Cual (ATB)" ~ "atb",
     encuestadora == "CIESMORI (ATB)" ~ "atb",
-    encuestadora == "Celag" ~ "NA",
+    encuestadora == "Celag" ~ "celag",
     encuestadora == "Tal Cual (La Razón)" ~ "la_razon",
     encuestadora == "Captura Consulting  (Poder y Placer/PAT)" ~ "pat"
   ))   
 
-df$encuestadora_1 %<>% gsub("NA", "", .)
+# corrección para encuestas conjuntas
+df[is.na(df$medio) & df$encuestadora_1 == "viaciencia", "medio"] <- "Red Uno/ATB/Unitel/Bolivisión/PAT"
+df[is.na(df$medio) & df$encuestadora_1 == "mercados_y_muestras", "medio"] <- "Página Siete/Los Tiempos/Asuntos Centrales"
+
+
 df %<>% 
   select(-encuestadora) %>% 
   rename(encuestadora = encuestadora_1)
@@ -73,6 +78,7 @@ df %<>%
 df %<>% 
   mutate(codigo_encuesta = paste0(encuestadora, "_", mes, "_", ano)) %>% 
   rename(año = ano)
+
 
 df %>% 
   rio::export("output_para_procesar/encuestas.xlsx")

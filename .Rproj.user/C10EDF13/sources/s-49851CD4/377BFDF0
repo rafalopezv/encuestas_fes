@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1566223569613.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "377BFDF0",
+    "lastKnownWriteTime" : 4402626812,
+    "last_content_update" : 1566223569613,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "AE469694",
+        "caption" : "encuestas_1",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=encuestas_1&cache_key=AE469694",
+        "displayedObservations" : 31,
+        "environment" : "",
+        "expression" : "encuestas_1",
+        "object" : "encuestas_1",
+        "preview" : 0,
+        "totalObservations" : 31,
+        "variables" : 42
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

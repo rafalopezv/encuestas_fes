@@ -12,9 +12,9 @@
     "path" : null,
     "project_path" : null,
     "properties" : {
-        "cacheKey" : "EDA7C3AE",
+        "cacheKey" : "85EF35D0",
         "caption" : "encuestas",
-        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=encuestas&cache_key=EDA7C3AE",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=encuestas&cache_key=85EF35D0",
         "displayedObservations" : "644",
         "environment" : "",
         "expression" : "encuestas",

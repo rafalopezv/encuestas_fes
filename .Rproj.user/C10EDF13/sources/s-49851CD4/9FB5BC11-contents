@@ -5,6 +5,7 @@ library(broom)
 library(magrittr)
 
 encuestas <- rio::import("output_para_procesar/encuestas.xlsx")
+
 encuestas %>% 
   select(mes, año) %>% 
   unique() %>% 
@@ -14,8 +15,18 @@ encuestas %>%
   right_join(encuestas, .) %>% 
   mutate(fecha = paste0(mes, " ", año)) -> encuestas
 
-fichas <- rio::import("output_para_procesar/fichas_hn_suki.xlsx") %>% 
-  select(-no, -año)
+fichas <- readxl::read_excel("output_para_procesar/fichas_hn_suki.xlsx") %>% 
+  select(-no, -año) %>% 
+  filter(!is.na(codigo_encuesta)) %>% 
+  filter(str_detect(codigo_encuesta, "\\*|:", negate = T)) %>% 
+  # esto solo si las fechas salen mal
+  mutate(
+    fecha_inicio_encuesta = janitor::excel_numeric_to_date(fecha_inicio_encuesta),
+    fecha_conclusion_encuesta = janitor::excel_numeric_to_date(fecha_conclusion_encuesta)
+  )
+
+# prueba para ver que todos los resulatdos tengan su ficha técnica
+(encuestas$codigo_encuesta %>% unique)[!(encuestas$codigo_encuesta %>% unique) %in% (fichas$codigo_encuesta %>% unique)]
 
 df <- merge(encuestas, fichas, by = "codigo_encuesta") 
 
@@ -60,6 +71,9 @@ otros <- df %>%
     candidato = "Otros"
   )
 
+# correcion de NA para valores de otros y no declarados
+otros[which(otros$valor == 0), "valor"] <- NA
+
 no_declarado <- df %>% 
   filter(candidato == "no declarado") %>%
   group_by(margen_error, confianza, alcance_muestra, fecha_inicio_encuesta, fecha_conclusion_encuesta, encuestadora_1, fecha_1) %>% 
@@ -69,6 +83,9 @@ no_declarado <- df %>%
     max = valor + margen_error,
     candidato = "Voto no declarado"
   )
+
+# correcion de NA para valores de otros y no declarados
+no_declarado[which(no_declarado$valor == 0), "valor"] <- NA
 
 # gráfico 1 con arearange
 hc <- highchart() %>% 
@@ -183,7 +200,7 @@ hc2 <- highchart() %>%
                                                          <b>Tamaño de la muestra:<b> {point.alcance_muestra}"
                 ), headerFormat = ""),
                 name = "Oscar Ortiz", id = "ortiz") %>% 
-  hc_add_series(otros, type = "line", color = '#A9A9A9', 
+  hc_add_series(otros, type = "line", color = '#A9A9A9', visible = F,  
                 hcaes(x = as.factor(fecha_1), y = valor, group = candidato),
                 tooltip = list(pointFormat = paste("<b>Otros:<b> {point.valor} %<br>
                                                          <b>Fecha de cierre encuesta:<b> {point.fecha_1}<br>
@@ -192,7 +209,7 @@ hc2 <- highchart() %>%
                                                          <b>Tamaño de la muestra:<b> {point.alcance_muestra}"
                 ), headerFormat = ""),
                 name = "Otras candidaturas", id = "otros") %>% 
-  hc_add_series(no_declarado, type = "line", color = '#00b200', 
+  hc_add_series(no_declarado, type = "line", color = '#00b200', visible = F,
                 hcaes(x = as.factor(fecha_1), y = valor),
                 tooltip = list(pointFormat = paste("<b>No declarado:<b> {point.valor} %<br>
                                                          <b>Fecha de cierre encuesta:<b> {point.fecha_1}<br>
@@ -209,20 +226,26 @@ hc2 <- highchart() %>%
   hc_subtitle(text = "Elecciones generales Bolivia 2019") %>% 
   hc_tooltip(shared = F) %>% 
   hc_plotOptions(line = list(
+    lineWidth = 4, 
+    connectNulls = F,
+    animation = list(
+      duration = 3000 
+    ),
     marker = list(
-      lineWidth = 1/100,
+      lineWidth = 300,
       lineColor = "#ffffff",
       enabled = F
     ),
     dataLabels = list(
-      enabled = T
+      enabled = T,
+      format = "{point.valor:.0f} %"
     ))
   ) %>% 
-  hc_add_theme(hc_theme_gridlight()) %>% 
+  hc_add_theme(hc_theme_elementary()) %>% 
   hc_credits(enabled = TRUE, text = "seleccione las candidaturas") 
 
 htmlwidgets::saveWidget(hc2, here::here("img", "sin_margen_error.html"))
-hc2
+
 ## graficos de tamaño muestra y márgenes de error
 df %>% 
   hchart(type = "column", hcaes(x = fecha_1, margen_error, group = encuestadora_1))

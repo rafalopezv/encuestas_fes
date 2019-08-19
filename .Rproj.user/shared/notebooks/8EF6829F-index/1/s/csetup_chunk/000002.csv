@@ -1,0 +1,3 @@
+"0","knitr::opts_knit$set(self.contained = T)"
+"0","#source(""procesamiento_graficos.R"")"
+"0","library(readr)"

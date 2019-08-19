@@ -12,16 +12,16 @@
     "path" : null,
     "project_path" : null,
     "properties" : {
-        "cacheKey" : "18142D8C",
+        "cacheKey" : "FEBD5FBA",
         "caption" : "fichas",
-        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=fichas&cache_key=18142D8C",
-        "displayedObservations" : "31",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=fichas&cache_key=FEBD5FBA",
+        "displayedObservations" : "40",
         "environment" : "",
         "expression" : "fichas",
         "object" : "fichas",
         "preview" : "0",
-        "totalObservations" : "31",
-        "variables" : "10"
+        "totalObservations" : "40",
+        "variables" : "12"
     },
     "read_only" : false,
     "read_only_alternatives" : [
