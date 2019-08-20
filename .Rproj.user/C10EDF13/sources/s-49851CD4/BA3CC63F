@@ -12,16 +12,16 @@
     "path" : null,
     "project_path" : null,
     "properties" : {
-        "cacheKey" : "85EF35D0",
+        "cacheKey" : "E2CF2068",
         "caption" : "encuestas",
-        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=encuestas&cache_key=85EF35D0",
-        "displayedObservations" : "644",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=encuestas&cache_key=E2CF2068",
+        "displayedObservations" : "920",
         "environment" : "",
         "expression" : "encuestas",
         "object" : "encuestas",
         "preview" : "0",
-        "totalObservations" : "644",
-        "variables" : "10"
+        "totalObservations" : "920",
+        "variables" : "8"
     },
     "read_only" : false,
     "read_only_alternatives" : [

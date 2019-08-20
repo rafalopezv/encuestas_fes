@@ -3,7 +3,7 @@ library(tidyverse)
 library(highcharter)
 library(broom)
 library(magrittr)
-
+View(fichas)
 encuestas <- rio::import("output_para_procesar/encuestas.xlsx")
 
 encuestas %>% 
@@ -44,7 +44,8 @@ df %<>%
     min = valor - margen_error,
     max = valor + margen_error,
     dia_cierre = lubridate::day(fecha_conclusion_encuesta),
-    fecha_1 = paste0(dia_cierre, " de ", mes, " de ", lubridate::year(fecha_conclusion_encuesta))
+    fecha_1 = paste0(dia_cierre, " de ", mes, " de ", lubridate::year(fecha_conclusion_encuesta)),
+    fecha_2 = paste0(mes, " ", año)
   ) %>% 
   arrange(fecha_inicio_encuesta) %>% 
   filter(!is.na(margen_error))  
@@ -218,7 +219,7 @@ hc2 <- highchart() %>%
                                                          <b>Tamaño de la muestra:<b> {point.alcance_muestra}"
                 ), headerFormat = ""),
                 name = "Voto no declarado", id = "no_declarado") %>%
-  hc_xAxis(categories = morales$fecha_1,
+  hc_xAxis(categories = morales$fecha_2,
            tickmarkPlacement = "on",
            title = list(enabled = T)) %>% 
   hc_yAxis(title = list(text = "Intención de voto")) %>% 
@@ -226,7 +227,7 @@ hc2 <- highchart() %>%
   hc_subtitle(text = "Elecciones generales Bolivia 2019") %>% 
   hc_tooltip(shared = F) %>% 
   hc_plotOptions(line = list(
-    lineWidth = 4, 
+    lineWidth = 4,
     connectNulls = F,
     animation = list(
       duration = 3000 
@@ -243,15 +244,6 @@ hc2 <- highchart() %>%
   ) %>% 
   hc_add_theme(hc_theme_elementary()) %>% 
   hc_credits(enabled = TRUE, text = "seleccione las candidaturas") 
-
+hc2
 htmlwidgets::saveWidget(hc2, here::here("img", "sin_margen_error.html"))
 
-## graficos de tamaño muestra y márgenes de error
-df %>% 
-  hchart(type = "column", hcaes(x = fecha_1, margen_error, group = encuestadora_1))
-View(df)
-
-plotOptions: {
-  line: {
-    dataLabels: {
-      enabled: true
